@@ -50,7 +50,7 @@ const triggerDeleteBlur = function () {
     row.classList.replace("add", "delete");
   })
 
-  window.setTimeout(deleteAllBooks, 200);
+  window.setTimeout(deleteAllBooks, 230);
 
 }
 

@@ -92,7 +92,7 @@ tr {
     filter: blur(0);
   }
   to {
-    filter: blur(5em);
+    filter: blur(2em);
   }
 }
 
@@ -105,7 +105,7 @@ tr {
 
 .delete {
   animation: deleteEffect;
-  animation-duration: 200ms;
+  animation-duration: 250ms;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
 }
