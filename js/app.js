@@ -2,9 +2,9 @@ const addNewBook = function () {
 
   event.preventDefault();
 
-  const title = this['title'].value;
+  const title = this.title.value;
   const author = this.author.value;
-  const genreArray = Array.from(this.genre).filter(option => option.selected).map(option => option.value);
+  const genre = this.genre.value;
   const quantity = this.quantity.value;
 
 
@@ -18,7 +18,7 @@ const addNewBook = function () {
   newAuthor.textContent = author;
 
   const newGenre = document.createElement("td");
-  addGenreElements(newGenre, genreArray);
+  newGenre.textContent = genre;
 
   const newQuantity = document.createElement("td");
   newQuantity.textContent = quantity;
@@ -29,6 +29,7 @@ const addNewBook = function () {
   newRow.appendChild(newQuantity);
 
   newRow.classList.add("add");
+  newRow.classList.add("row");
 
   tableBody.appendChild(newRow);
 
@@ -46,24 +47,11 @@ const triggerDeleteBlur = function () {
   const rowArray = Array.from(tableBody.children);
 
   rowArray.forEach((row) => {
-    row.classList.remove("add");
-    row.classList.add("delete");
+    row.classList.replace("add", "delete");
   })
 
   window.setTimeout(deleteAllBooks, 200);
 
-}
-
-const addGenreElements = function (newGenre, genreArray) {
-
-  const addLineBreak = document.createElement("br");
-
-  genreArray.forEach((genre) => {
-    const addGenre = document.createElement("p");
-    addGenre.textContent = genre;
-
-    newGenre.appendChild(addGenre);
-  })
 }
 
 const mainFunction = function () {

@@ -20,7 +20,7 @@
         </div>
 
         <div class="genre">
-          <select id="genre" multiple>
+          <select id="genre" required>
             <option value="" disabled selected>Pick a Genre...</option>
             <option value="Art">Art</option>
             <option value="Autobiography">Autobiography</option>
@@ -34,16 +34,18 @@
 
         </div>
 
-        <div class="Quantity">
+        <div class="quantity">
+          <label for="quantity">Quantity:</label>
           <input type="number" id = "quantity" value=1 step=1 min=1>
         </div>
 
-        <div class="Button">
+        <div class="button">
           <input type="submit" value="Add Book">
         </div>
 
       </form>
     </header>
+    <div class="table-body">
 
     <table>
       <thead>
@@ -60,13 +62,15 @@
       </tbody>
     </table>
 
-    <div class="Button">
+    <div class="bottom-button">
       <button type="button" name="delete-all">Delete All</button>
     </div>
 
+    </div>
 
-    <footer>
-      <p><b>Paul Wishart 2018 </b> © </p>
-    </footer>
   </body>
+
+  <footer>
+    <p><b>Paul Wishart 2018 </b> © </p>
+  </footer>
 </html>
