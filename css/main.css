@@ -6,13 +6,29 @@ tr {
   filter: blur(0.001em);
 }
 
-@keyframes deleteEffect {
+@keyframes addEffect {
   from {
     filter: blur(5em);
   }
   to {
     filter: blur(0);
   }
+}
+
+@keyframes deleteEffect {
+  from {
+    filter: blur(0);
+  }
+  to {
+    filter: blur(5em);
+  }
+}
+
+.add {
+  animation: addEffect;
+  animation-duration: 200ms;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
 }
 
 .delete {

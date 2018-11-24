@@ -28,28 +28,50 @@ const addNewBook = function () {
   newRow.appendChild(newGenre);
   newRow.appendChild(newQuantity);
 
-  newRow.classList.add("delete");
+  newRow.classList.add("add");
 
   tableBody.appendChild(newRow);
 
 }
 
+const deleteAllBooks = function () {
+  const tableBody = document.querySelector('tbody');
+  while (tableBody.firstChild) {
+    tableBody.removeChild(tableBody.firstChild);
+  }
+}
+
+const triggerDeleteBlur = function () {
+  const tableBody = document.querySelector('tbody');
+  const rowArray = Array.from(tableBody.children);
+
+  rowArray.forEach((row) => {
+    row.classList.remove("add");
+    row.classList.add("delete");
+  })
+
+  window.setTimeout(deleteAllBooks, 200);
+
+}
+
 const addGenreElements = function (newGenre, genreArray) {
 
-  const addLineBreak = document.createElement("br")
+  const addLineBreak = document.createElement("br");
 
   genreArray.forEach((genre) => {
     const addGenre = document.createElement("p");
     addGenre.textContent = genre;
 
     newGenre.appendChild(addGenre);
-    // newGenre.appendChild(addLineBreak)
   })
 }
 
 const mainFunction = function () {
-  const addBook = document.querySelector('form')
-  addBook.addEventListener('submit', addNewBook)
+  const addBook = document.querySelector('form');
+  addBook.addEventListener('submit', addNewBook);
+
+  const deleteBooks = document.querySelector('button');
+  deleteBooks.addEventListener('click', triggerDeleteBlur);
 }
 
 document.addEventListener('DOMContentLoaded', mainFunction);
