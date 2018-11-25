@@ -3,16 +3,30 @@ const addNewBook = function () {
   event.preventDefault();
 
   const noOfAttributes = this.length-1; // -1 to eliminate the submit button
-  const tableBody = document.querySelector('tbody');
-  if (tableBody.children.length) {tableBody.lastChild.classList.remove("last")};
-  const newRow = document.createElement("tr");
-  newRow.classList.add("row", "add", "last");
+  const tableBody = selectTable();
+  const newRow = selectRow();
 
   const valueArray = createValueArray(this, noOfAttributes);
   const elementArray = createElementArray(valueArray);
 
   addElementsToRow(elementArray, newRow);
   tableBody.appendChild(newRow);
+}
+
+const selectTable = function () {
+  const table = document.querySelector('tbody');
+  unassignLastRow(table);
+  return table;
+}
+
+const selectRow = function () {
+  const row = document.createElement("tr");
+  row.classList.add("row", "add", "last");
+  return row;
+}
+
+const unassignLastRow = function (table) {
+  if (table.children.length) {table.lastChild.classList.remove("last")};
 }
 
 const createValueArray = function (array, lengthOfArray) {
@@ -42,7 +56,7 @@ const startDeleteChain = function () {
   const deletedRow = document.querySelector('.last');
   deletedRow.classList.replace("add", "delete");
 
-  nextRow = deletedRow.previousElementSibling
+  nextRow = deletedRow.previousElementSibling;
 
   window.setTimeout(removeLastBook, 200);
 
