@@ -39,19 +39,20 @@ const removeLastBook = function () {
 }
 
 const startDeleteChain = function () {
-  const deleteRow = document.querySelector('.last');
-  deleteRow.classList.replace("add", "delete");
+  const deletedRow = document.querySelector('.last');
+  deletedRow.classList.replace("add", "delete");
+
+  nextRow = deletedRow.previousElementSibling
 
   window.setTimeout(removeLastBook, 200);
-  
-  if (deleteRow.previousElementSibling)
-  {setNextRowForDeletion(deleteRow, deleteRow.previousElementSibling);}
+
+  if (nextRow) {setupNextRow(deletedRow, nextRow);}
 }
 
-const setNextRowForDeletion = function (last, secondLast) {
+const setupNextRow = function (last, secondLast) {
   last.classList.remove("last");
   secondLast.classList.add("last");
-  window.setTimeout(startDeleteChain, 80);
+  window.setTimeout(startDeleteChain, 70);
 }
 
 const mainFunction = function () {
