@@ -105,7 +105,7 @@ tr {
 
 .delete {
   animation: deleteEffect;
-  animation-duration: 250ms;
+  animation-duration: 200ms;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
 }

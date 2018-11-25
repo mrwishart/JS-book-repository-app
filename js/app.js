@@ -2,56 +2,56 @@ const addNewBook = function () {
 
   event.preventDefault();
 
-  const title = this.title.value;
-  const author = this.author.value;
-  const genre = this.genre.value;
-  const quantity = this.quantity.value;
-
-
+  const noOfAttributes = this.length-1; // -1 to eliminate the submit button
   const tableBody = document.querySelector('tbody');
+  if (tableBody.children.length) {tableBody.lastChild.classList.remove("last")};
   const newRow = document.createElement("tr");
+  newRow.classList.add("row", "add", "last");
 
-  const newTitle = document.createElement("td");
-  newTitle.textContent = title;
+  const valueArray = createValueArray(this, noOfAttributes);
+  const elementArray = createElementArray(valueArray);
 
-  const newAuthor = document.createElement("td");
-  newAuthor.textContent = author;
-
-  const newGenre = document.createElement("td");
-  newGenre.textContent = genre;
-
-  const newQuantity = document.createElement("td");
-  newQuantity.textContent = quantity;
-
-  newRow.appendChild(newTitle);
-  newRow.appendChild(newAuthor);
-  newRow.appendChild(newGenre);
-  newRow.appendChild(newQuantity);
-
-  newRow.classList.add("add");
-  newRow.classList.add("row");
-
+  addElementsToRow(elementArray, newRow);
   tableBody.appendChild(newRow);
-
 }
 
-const deleteAllBooks = function () {
-  const tableBody = document.querySelector('tbody');
-  while (tableBody.firstChild) {
-    tableBody.removeChild(tableBody.firstChild);
-  }
+const createValueArray = function (array, lengthOfArray) {
+  return Array.from(array).map(option => option.value).splice(0, lengthOfArray);
 }
 
-const triggerDeleteBlur = function () {
-  const tableBody = document.querySelector('tbody');
-  const rowArray = Array.from(tableBody.children);
+const createElementArray = function (array) {
+  return array.map((value) => {
+    const newElement = document.createElement("td");
+    newElement.textContent = value;
+    return newElement
+  });
+}
 
-  rowArray.forEach((row) => {
-    row.classList.replace("add", "delete");
+const addElementsToRow = function (elements, row) {
+  elements.forEach((element) => {
+    row.appendChild(element);
   })
+}
 
-  window.setTimeout(deleteAllBooks, 230);
+const removeLastBook = function () {
+  const tableBody = document.querySelector('tbody');
+  tableBody.removeChild(tableBody.lastChild);
+}
 
+const startDeleteChain = function () {
+  const deleteRow = document.querySelector('.last');
+  deleteRow.classList.replace("add", "delete");
+
+  window.setTimeout(removeLastBook, 200);
+  
+  if (deleteRow.previousElementSibling)
+  {setNextRowForDeletion(deleteRow, deleteRow.previousElementSibling);}
+}
+
+const setNextRowForDeletion = function (last, secondLast) {
+  last.classList.remove("last");
+  secondLast.classList.add("last");
+  window.setTimeout(startDeleteChain, 80);
 }
 
 const mainFunction = function () {
@@ -59,7 +59,7 @@ const mainFunction = function () {
   addBook.addEventListener('submit', addNewBook);
 
   const deleteBooks = document.querySelector('button');
-  deleteBooks.addEventListener('click', triggerDeleteBlur);
+  deleteBooks.addEventListener('click', startDeleteChain);
 }
 
 document.addEventListener('DOMContentLoaded', mainFunction);
