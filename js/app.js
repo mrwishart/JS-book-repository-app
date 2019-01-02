@@ -2,15 +2,17 @@ const addNewBook = function () {
 
   event.preventDefault();
 
-  const noOfAttributes = this.length-1; // -1 to eliminate the submit button
+  const noOfAttributes = ["title", "author", "genre", "quantity"];
   const tableBody = selectTable();
   const newRow = selectRow();
 
-  const valueArray = createValueArray(this, noOfAttributes);
+  const valueArray = createValueArray(this, noOfAttributes.length);
   const elementArray = createElementArray(valueArray);
 
   addElementsToRow(elementArray, newRow);
   tableBody.appendChild(newRow);
+
+  this.reset();
 }
 
 const selectTable = function () {
